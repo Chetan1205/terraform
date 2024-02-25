@@ -29,5 +29,5 @@ variable "iamge_id"{
 }
 
 variable "machine_type"{
-  dafault = "t2.micro"
+  default = "t2.micro"
 }

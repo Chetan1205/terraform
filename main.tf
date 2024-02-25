@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "ap-southeast-2b"
+  region = "ap-southeast-2"
 }
 
 resource "aws_instance" "new_instance"{

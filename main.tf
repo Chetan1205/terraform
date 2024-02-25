@@ -2,7 +2,7 @@ provider "aws" {
   region = "ap-southeast-2b"
 }
 
-resource "aws_instance" "my_instance"{
+resource "aws_instance" "new_instance"{
   ami = "ami-04f5097681773b989"
   instance_type = "t2.micro"
   key_name = "chetan-key"

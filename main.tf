@@ -2,6 +2,7 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+#instance created
 resource "aws_instance" "new_instance"{
   ami = var.iamge_id
   instance_type = var.machine_type
@@ -13,6 +14,7 @@ resource "aws_instance" "new_instance"{
   }
 }
 
+#instance created
 resource "aws_instance" "new_instance2"{
   ami = var.iamge_id
   instance_type = var.machine_type
@@ -24,6 +26,7 @@ resource "aws_instance" "new_instance2"{
   }
 }
 
+#variable decleration
 variable "iamge_id"{
   default = "ami-04f5097681773b989"
 }

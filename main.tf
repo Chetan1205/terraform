@@ -1,50 +1,14 @@
 provider "aws" {
-    region = "eu-west-3"
+  region = "ap-southeast-2b"
 }
 
-data "aws_iam_policy_document" "assume-role" {
-    statement {
-    effect = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["eks.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
+resource "aws_instance" "my_instance"{
+  ami = "ami-04f5097681773b989"
+  instance_type = "t2.micro"
+  key_name = "chetan-key"
+  vpc_security_group_ids = "sgr-0faf159bd4e7af273"
+  tags = {
+    Name = "new_instance"
+    env = "dev"
   }
-}
-
-resource "aws_iam_role" "my_role" {
-    name      = "my-eks-cluster"
-    assume_role_policy = data.aws_iam_policy_document.assume-role.json
-}
-
-resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
-   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-   role       = aws_iam_role.my_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
-   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
-   role       = aws_iam_role.my_role.name
-}
-
-
-resource "aws_eks_cluster" "eks-cluster" {
-   name     = "my-cluster"
-   role_arn = aws_iam_role.my_role.arn
-
-   vpc_config {
-     subnet_ids = [
-         "subnet-0b334f21255855b3e",
-         "subnet-083e357b54c924fc8",
-         "subnet-0257ef8ab450e1e5b"
-         ]
-  }
-  
-  depends_on = [
-    aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
-    aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
-  ]
 }

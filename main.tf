@@ -6,7 +6,7 @@ resource "aws_instance" "my_instance"{
   ami = "ami-04f5097681773b989"
   instance_type = "t2.micro"
   key_name = "chetan-key"
-  vpc_security_group_ids = "sgr-0faf159bd4e7af273"
+  vpc_security_group_ids = "sg-09968fc68cf8fef58"
   tags = {
     Name = "new_instance"
     env = "dev"
